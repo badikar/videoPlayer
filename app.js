@@ -26,18 +26,20 @@ const togglePlay = () => {
 
 //  full screen
 function fullScreen() {
-  isFullScreen = false;
-  console.log('add class full');
-  fullScreenIcon.className.replace('fa-solid fa-expand', 'fa-light fa-minimize');
+  console.log('added class full');
+  videoContainer.classList.add('full-screen');
+  isFullScreen = true;
+  fullScreenIcon.className.replace('fa-expand', 'fa-pause-circle');
 }
 function minimizeScreen() {
-  console.log('add class minimize');
-  // fullScreenIcon.className.replace('fa-solid fa-expand', 'fa-light fa-minimize');
-  isFullScreen = true;
+  console.log('added class mini');
+  videoContainer.classList.remove('full-screen');
+  fullScreenIcon.className.replace('fa-expand', 'fa-pause-circle');
+  isFullScreen = false;
 }
 
 function toggleFullScreen() {
-  isFullScreen ? fullScreen() : minimizeScreen();
+  isFullScreen ? minimizeScreen() : fullScreen();
   console.log(isFullScreen);
 }
 
