@@ -27,7 +27,8 @@ video {
   position: absolute;
   bottom: 0;
   left: 0;
-  /* right: 0; */
+  /* po to by ::before linear-gradient rozciagnac */
+  right: 0;
   color: white;
   z-index: 10;
   opacity: 0;
@@ -36,17 +37,16 @@ video {
 .video-controls-container::before {
   content: '';
   position: absolute;
-  background: linear-gradient(to top rgba(255, 255, 255, 0.75), transparent);
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
   width: 100%;
-  aspect-ratio: 6/1;
-  z-index: -1;
+  aspect-ratio: 6 / 1;
+  /* z-index: -1; */
   pointer-events: none;
 }
 
 .video-container:hover .video-controls-container,
-/* for keyboard tab access */
-.video-container:focus-within .video-controls-container,
-.video-container.paused .video-controls-container {
+.video-container:focus-within .video-controls-container {
   opacity: 1;
 }
 .video-controls-container .controls {
