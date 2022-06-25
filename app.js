@@ -71,7 +71,7 @@ function setVolume(e) {
   console.log(clickX);
   video.volume = clickX / width;
   console.log(volumeSliderThumb);
-  volumeSliderThumb.style.transform = `translateX(${clickX}px)`;
+  volumeSliderThumb.style.transform = `translate(${clickX}px,-33%)`;
 }
 
-volumeSlider.addEventListener('click', setVolume);
+volumeSlider.addEventListener('mousedown', setVolume);
