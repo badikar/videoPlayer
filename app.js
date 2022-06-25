@@ -3,10 +3,8 @@ const video = document.querySelector('video');
 const videoContainer = document.querySelector('.video-container');
 
 const playPauseBtn = document.querySelector('.play-pause-btn');
-const playPauseIcon = document.querySelector('.play-pause-icon');
 
 const fullScreenBtn = document.querySelector('.full-screen-btn');
-const fullScreenIcon = document.querySelector('.full-screen-icon');
 
 // flags
 let isFullScreen = false;
@@ -14,33 +12,32 @@ let isFullScreen = false;
 // Play/Pause
 function playVideo() {
   video.play();
-  playPauseIcon.classList.replace('fa-play-circle', 'fa-pause-circle');
+  playPauseBtn.firstElementChild.setAttribute('class', 'fa fa-pause-circle ');
 }
 function pauseVideo() {
   video.pause();
-  playPauseIcon.classList.replace('fa-pause-circle', 'fa-play-circle');
+  playPauseBtn.firstElementChild.setAttribute('class', 'fa fa-play-circle ');
 }
 const togglePlay = () => {
   video.paused ? playVideo() : pauseVideo();
 };
+function onPlayEnded() {
+  playPauseBtn.firstElementChild.setAttribute('class', 'fa fa-play-circle ');
+}
 
 //  full screen
 function fullScreen() {
-  console.log('added class full');
-  videoContainer.classList.add('full-screen');
+  videoContainer.requestFullscreen();
   isFullScreen = true;
-  fullScreenIcon.className.replace('fa-expand', 'fa-pause-circle');
+  fullScreenBtn.firstElementChild.setAttribute('class', 'fa fa-compress');
 }
 function minimizeScreen() {
-  console.log('added class mini');
-  videoContainer.classList.remove('full-screen');
-  fullScreenIcon.className.replace('fa-expand', 'fa-pause-circle');
+  document.exitFullscreen();
   isFullScreen = false;
+  fullScreenBtn.firstElementChild.setAttribute('class', 'fa fa-expand');
 }
-
 function toggleFullScreen() {
   isFullScreen ? minimizeScreen() : fullScreen();
-  console.log(isFullScreen);
 }
 
 // event listeners
@@ -52,6 +49,7 @@ document.addEventListener('keydown', (e) => {
       break;
     case 'f':
       toggleFullScreen();
+      break;
   }
 });
 
@@ -59,5 +57,21 @@ document.addEventListener('keydown', (e) => {
 fullScreenBtn.addEventListener('click', toggleFullScreen);
 
 // toggle play lsiteners
+video.addEventListener('ended', onPlayEnded);
 video.addEventListener('click', togglePlay);
 playPauseBtn.addEventListener('click', togglePlay);
+
+const volumeSliderThumb = document.querySelector('.volume-slider-thumb');
+const volumeSlider = document.querySelector('.volume-slider');
+
+function setVolume(e) {
+  const width = this.clientWidth;
+  console.log(width);
+  const clickX = e.offsetX;
+  console.log(clickX);
+  video.volume = clickX / width;
+  console.log(volumeSliderThumb);
+  volumeSliderThumb.style.transform = `translateX(${clickX}px)`;
+}
+
+volumeSlider.addEventListener('click', setVolume);

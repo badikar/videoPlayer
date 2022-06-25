@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./normalize.css">
-    <!-- favicon console fix -->
-    <link rel="shortcut icon" href="#">
-    <!-- css styles -->
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-      />
-    <title>Video Player</title>
-  </head>
-  <body>
-    <div class="video-container">
-      <div class="video-controls-container">
-        <div class="timeline-container"></div>
-        <div class="controls">
-          <button class="play-pause-btn">
-            <i class="fa fa-play-circle fa-2x"></i>
-          </button>
-          <button class="full-screen-btn">
-            <i class="fa fa-expand fa-2x"></i>
-          </button>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./normalize.css">
+        <!-- favicon console fix -->
+        <link rel="shortcut icon" href="#">
+        <!-- css styles -->
+        <link rel="stylesheet" href="./styles.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            />
+        <title>Video Player</title>
+    </head>
+    <body>
+        <div class="video-container">
+            <div class="video-controls-container">
+                <div class="timeline-container"></div>
+                <div class="controls">
+                    <button class="play-pause-btn">
+                        <i class="fa fa-play-circle"></i>
+                    </button>
+                    <button class="full-screen-btn">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    <div class="volume-container">
+                        <button class="volume-btn" data-volume-level="high">
+                            <i class="fa fa-volume-high"></i>
+                        </button>
+                        <div class="volume-slider">
+                            <div class="volume-slider-thumb"></div>
+                        </div>
+                    </div>
 
 
+                </div>
+            </div>
+            <video src="./videos/vid_1.mp4"></video>
         </div>
-      </div>
-      <video src="./videos/vid_1.mp4"></video>
-    </div>
-    <script src="app.js"></script>
-  </body>
+        <script src="app.js"></script>
+    </body>
 </html>
