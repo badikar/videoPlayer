@@ -61,17 +61,31 @@ video.addEventListener('ended', onPlayEnded);
 video.addEventListener('click', togglePlay);
 playPauseBtn.addEventListener('click', togglePlay);
 
-const volumeSliderThumb = document.querySelector('.volume-slider-thumb');
+// volume control
 const volumeSlider = document.querySelector('.volume-slider');
+const volumeThumb = document.querySelector('.volume-slider-thumb');
+const volumeBtn = document.querySelector('.volume-btn');
 
 function setVolume(e) {
+  if (e.target.classList.contains('volume-slider-thumb')) {
+    return;
+  }
   const width = this.clientWidth;
-  console.log(width);
   const clickX = e.offsetX;
-  console.log(clickX);
+  volumeThumb.style.transform = `translate(${clickX}px,-50%)`;
   video.volume = clickX / width;
-  console.log(volumeSliderThumb);
-  volumeSliderThumb.style.transform = `translate(${clickX}px,-33%)`;
+  console.log(video.volume);
+  if (video.volume < 0.02) {
+    muteVolume();
+  } else {
+    video.muted = false;
+    volumeBtn.firstElementChild.setAttribute('class', 'fa fa-volume-high');
+  }
 }
 
-volumeSlider.addEventListener('mousedown', setVolume);
+function muteVolume() {
+  volumeBtn.firstElementChild.setAttribute('class', 'fa fa-volume-mute');
+  video.muted = true;
+}
+
+volumeSlider.addEventListener('click', setVolume);
