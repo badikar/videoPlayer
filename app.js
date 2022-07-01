@@ -106,6 +106,6 @@ function setVolume(e) {
 volumeBtn.addEventListener('click', toggleMute);
 
 // volumeSlider.addEventListener('click', setVolume);
-volumeSlider.addEventListener('mousemove', setVolume);
-volumeSlider.addEventListener('mousedown', setVolume);
-volumeSlider.addEventListener('mousedown', () => (isMoving = true));
+volumeSlider.addEventListener('pointermove', setVolume);
+volumeSlider.addEventListener('pointerdown', setVolume);
+volumeSlider.addEventListener('pointerdown', () => (isMoving = true));
