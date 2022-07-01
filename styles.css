@@ -65,9 +65,6 @@ video {
 .video-controls-container .controls .volume-container:hover {
   opacity: 1;
 }
-.volume-btn {
-  color: red;
-}
 
 .volume-container {
   display: flex;
@@ -75,13 +72,13 @@ video {
   width: 120px;
 }
 .volume-slider {
-  width: 100%;
+  width: 0;
   position: relative;
   transition: width 100ms ease-in-out;
 }
 .volume-slider-progres {
   background: rgb(255, 255, 255);
-  width: 100%;
+  width: 0;
   height: 3px;
   position: absolute;
   top: 50%;
@@ -104,6 +101,7 @@ video {
 .volume-container:hover .volume-slider-progres {
   display: inline-block;
 }
-.volume-container:hover .volume-slider {
+.volume-container:hover .volume-slider,
+.volume-container:hover .volume-slider-progres {
   width: 100%;
 }
