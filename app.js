@@ -87,21 +87,25 @@ function toggleMute() {
   volumeBtn.firstElementChild.classList.toggle('fa-volume-mute');
 }
 
+let isMoving = false;
+
 function setVolume(e) {
-  if (e.target.classList.contains('volume-slider-thumb')) {
-    return;
+  // console.log(isMoving);
+  // console.log(e.buttons & 1);
+  if (isMoving === false || e.target.classList.contains('volume-slider-thumb')) return;
+  else if (e.buttons & (1 === 1)) {
+    const width = this.clientWidth;
+    const clickX = e.offsetX;
+    volumeThumb.style.transform = `translate(${clickX - width}px,-50%)`;
+    video.volume = clickX / width;
+    video.volume > 0.5 ? highVolume() : lowVolume();
+    if (video.volume <= 0.04) muteVolume();
   }
-  const width = this.clientWidth;
-  const clickX = e.offsetX;
-  console.log(width);
-  console.log(clickX);
-  volumeThumb.style.transform = `translate(${clickX - width}px,-50%)`;
-  video.volume = clickX / width;
-  video.volume > 0.5 ? highVolume() : lowVolume();
-  if (video.volume <= 0.04) muteVolume();
 }
 
 volumeBtn.addEventListener('click', toggleMute);
 
-volumeSlider.addEventListener('click', setVolume);
-volumeSlider.addEventListener('pointerup', setVolume);
+// volumeSlider.addEventListener('click', setVolume);
+volumeSlider.addEventListener('mousemove', setVolume);
+volumeSlider.addEventListener('mousedown', setVolume);
+volumeSlider.addEventListener('mousedown', () => (isMoving = true));
