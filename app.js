@@ -87,8 +87,6 @@ function toggleMute() {
   volumeBtn.firstElementChild.classList.toggle('fa-volume-mute');
 }
 
-// function increaseVolume = ()
-
 function setVolume(e) {
   if (e.target.classList.contains('volume-slider-thumb')) {
     return;
@@ -104,5 +102,6 @@ function setVolume(e) {
 }
 
 volumeBtn.addEventListener('click', toggleMute);
+
+volumeSlider.addEventListener('click', setVolume);
 volumeSlider.addEventListener('pointerup', setVolume);
-// volumeSlider.addEventListener('pointermove', setVolume);
