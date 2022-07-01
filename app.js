@@ -66,26 +66,31 @@ const volumeSlider = document.querySelector('.volume-slider');
 const volumeThumb = document.querySelector('.volume-slider-thumb');
 const volumeBtn = document.querySelector('.volume-btn');
 
+const lowVolume = () => {
+  volumeBtn.firstElementChild.setAttribute('class', 'fa fa-volume-low fa-fw');
+  video.muted = false;
+};
+const highVolume = () => {
+  volumeBtn.firstElementChild.setAttribute('class', 'fa fa-volume-high fa-fw');
+  video.muted = false;
+};
+const muteVolume = () => {
+  volumeBtn.firstElementChild.setAttribute('class', 'fa fa-volume-mute fa-fw');
+  video.muted = true;
+};
 function setVolume(e) {
   if (e.target.classList.contains('volume-slider-thumb')) {
     return;
   }
   const width = this.clientWidth;
   const clickX = e.offsetX;
-  volumeThumb.style.transform = `translate(${clickX}px,-50%)`;
+  console.log(width);
+  console.log(clickX);
+  volumeThumb.style.transform = `translate(${clickX - width}px,-50%)`;
   video.volume = clickX / width;
-  console.log(video.volume);
-  if (video.volume < 0.02) {
-    muteVolume();
-  } else {
-    video.muted = false;
-    volumeBtn.firstElementChild.setAttribute('class', 'fa fa-volume-high');
-  }
+  video.volume > 0.4 ? highVolume() : lowVolume();
+  if (video.volume <= 0.04) muteVolume();
 }
 
-function muteVolume() {
-  volumeBtn.firstElementChild.setAttribute('class', 'fa fa-volume-mute');
-  video.muted = true;
-}
-
-volumeSlider.addEventListener('click', setVolume);
+volumeSlider.addEventListener('pointerup', setVolume);
+volumeSlider.addEventListener('pointermove', setVolume);
