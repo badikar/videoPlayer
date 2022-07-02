@@ -118,6 +118,7 @@ video {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  opacity: 0.8;
 }
 .wide-btn {
   width: 40px;
@@ -126,8 +127,37 @@ video {
 .timeline-container {
   display: flex;
   align-items: center;
+  /* flex-grow: 1; */
+  width: 100%;
   gap: 0.25rem;
-  flex-grow: 1;
+  cursor: pointer;
+  background: yellow;
+}
+
+.timeline {
+  position: relative;
+  width: 100%;
   height: 3px;
   background: white;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: calc(100% - var(--progress-position, 0.6) * 100%);
+  background: red;
+}
+.timeline-thumb {
+  position: absolute;
+  height: 400%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  right: calc(100% - var(--progress-position, 0.6) * 100%);
+  background: transparent;
+  border: 1px solid yellow;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
 }
