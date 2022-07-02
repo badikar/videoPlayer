@@ -111,3 +111,47 @@ volumeSlider.addEventListener('pointerdown', setVolume);
 volumeSlider.addEventListener('touchmove', setVolume);
 
 volumeSlider.addEventListener('pointerdown', () => (isMoving = true));
+
+const CurrentTimeDOM = document.querySelector('.current-time');
+const totalDuration = document.querySelector('.total-duration');
+
+// duration
+
+video.addEventListener('loadeddata', function () {
+  totalDuration.innerText = formatDuration(this.duration);
+});
+
+// time update
+video.addEventListener('timeupdate', function () {
+  CurrentTimeDOM.innerText = formatDuration(this.currentTime);
+});
+
+// total duration
+const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
+  minimumIntegerDigits: 2,
+});
+
+function formatDuration(time) {
+  const seconds = Math.floor(time % 60);
+  const minutes = Math.floor(time / 60) % 60;
+  const hours = Math.floor(time / 3600);
+  if (hours === 0) {
+    return `${minutes}:${leadingZeroFormatter.format(seconds)}`;
+  } else {
+    return `${hours}:${leadingZeroFormatter.format(minutes)}:${leadingZeroFormatter.format(
+      seconds
+    )}`;
+  }
+}
+
+//  playback speed
+const speedBtn = document.querySelector('.speed-btn');
+
+speedBtn.addEventListener('click', changePlaybackSpeed);
+
+function changePlaybackSpeed() {
+  let newPlaybackRate = video.playbackRate + 0.25;
+  if (newPlaybackRate > 2) newPlaybackRate = 0.25;
+  video.playbackRate = newPlaybackRate;
+  speedBtn.innerText = `${newPlaybackRate}x`;
+}
