@@ -96,7 +96,10 @@ function setVolume(e) {
   else if (e.buttons & (1 === 1)) {
     const width = this.clientWidth;
     const clickX = e.offsetX;
+    // console.log('width' + width);
+    // console.log('click' + clickX);
     volumeThumb.style.transform = `translate(${clickX - width}px,-50%)`;
+
     video.volume = clickX / width;
     video.volume > 0.5 ? highVolume() : lowVolume();
     if (video.volume <= 0.04) muteVolume();
@@ -118,12 +121,12 @@ const totalDuration = document.querySelector('.total-duration');
 // duration
 
 video.addEventListener('loadeddata', function () {
-  totalDuration.innerText = formatDuration(this.duration);
+  totalDuration.textContent = formatDuration(this.duration);
 });
 
 // time update
 video.addEventListener('timeupdate', function () {
-  CurrentTimeDOM.innerText = formatDuration(this.currentTime);
+  CurrentTimeDOM.textContent = formatDuration(this.currentTime);
 });
 
 // total duration
@@ -153,5 +156,5 @@ function changePlaybackSpeed() {
   let newPlaybackRate = video.playbackRate + 0.25;
   if (newPlaybackRate > 2) newPlaybackRate = 0.25;
   video.playbackRate = newPlaybackRate;
-  speedBtn.innerText = `${newPlaybackRate}x`;
+  speedBtn.textContent = `${newPlaybackRate}x`;
 }
