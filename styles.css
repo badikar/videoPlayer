@@ -48,13 +48,13 @@ video {
 }
 
 .video-controls-container .controls button,
-.video-controls-container .controls .volume-container {
+.video-controls-container .controls .time-display {
   background: none;
   border: none;
   color: inherit;
   padding: 0;
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.75;
   transition: opacity 150ms ease-in-out;
 }
 .video-controls-container .controls button i {
@@ -62,7 +62,8 @@ video {
 }
 
 .video-controls-container .controls button:hover,
-.video-controls-container .controls .volume-container:hover {
+.video-controls-container .controls .volume-container:hover,
+.video-controls-container .controls .time-display:hover {
   opacity: 1;
 }
 

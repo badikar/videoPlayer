@@ -108,4 +108,6 @@ volumeBtn.addEventListener('click', toggleMute);
 // volumeSlider.addEventListener('click', setVolume);
 volumeSlider.addEventListener('pointermove', setVolume);
 volumeSlider.addEventListener('pointerdown', setVolume);
+volumeSlider.addEventListener('touchmove', setVolume);
+
 volumeSlider.addEventListener('pointerdown', () => (isMoving = true));
