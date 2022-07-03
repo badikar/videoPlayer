@@ -91,26 +91,13 @@ function toggleMute() {
 let isMoving = false;
 
 function setVolume(e) {
-  // console.log(isMoving);
-  // console.log(e.buttons & 1);
-  if (isMoving === false)
-    // || e.target.classList.contains('volume-slider-thumb'))
-    return;
+  if (isMoving === false) return;
   else if (e.buttons & (1 === 1)) {
-    // const width = this.clientWidth;
-    // const clickX = e.offsetX;
-    // console.log('width' + width);
-
     const rect = volumeSlider.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
     console.log(percent);
     video.volume = percent;
     volumeSlider.style.setProperty('--progres-position', percent);
-    volumeContainer;
-    // console.log('click' + clickX);
-    // volumeThumb.style.transform = `translate(${clickX - width}px,-50%)`;
-
-    // video.volume = clickX / width;
     video.volume > 0.5 ? highVolume() : lowVolume();
     if (video.volume <= 0.02) muteVolume();
   }
@@ -122,13 +109,12 @@ volumeBtn.addEventListener('click', toggleMute);
 volumeSlider.addEventListener('pointermove', setVolume);
 volumeSlider.addEventListener('pointerdown', setVolume);
 volumeSlider.addEventListener('touchmove', setVolume);
-
 volumeSlider.addEventListener('pointerdown', () => (isMoving = true));
+
+// duration
 
 const currentTimeDOM = document.querySelector('.current-time');
 const totalDuration = document.querySelector('.total-duration');
-
-// duration
 
 video.addEventListener('loadeddata', function () {
   totalDuration.textContent = formatDuration(this.duration);
@@ -183,7 +169,6 @@ function updateTimeline(e) {
   if (e.buttons & (1 === 1)) {
     const rect = timelineContainer.getBoundingClientRect();
     const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
-    console.log(rect);
     timelineContainer.style.setProperty('--progres-position', percent);
     video.currentTime = percent * video.duration;
   }
