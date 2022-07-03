@@ -26,7 +26,10 @@ body {
   position: absolute;
   inset: 0;
   background: rgb(0, 0, 0, 0.3);
-  z-index: 10;
+  display: block;
+}
+.video-container-overlay-remove {
+  display: none;
 }
 
 .overlay-icon {
@@ -41,7 +44,7 @@ body {
   place-items: center;
 }
 .overlay-icon i {
-  font-size: 6rem;
+  font-size: 5rem;
   color: rgb(255, 255, 255);
   opacity: 0.5;
   transition: font-size 200ms ease-in-out, opacity 150ms ease-in-out;
@@ -49,7 +52,7 @@ body {
 
 .overlay-icon i:hover {
   opacity: 0.8;
-  font-size: 7rem;
+  font-size: 6rem;
 }
 
 video {

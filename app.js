@@ -12,11 +12,12 @@ let isFullScreen = false;
 
 // Play/Pause
 function playVideo() {
-  videoContainerOverlay.classList.remove('video-container-overlay');
+  videoContainerOverlay.classList.add('video-container-overlay-remove');
   video.play();
   playPauseBtn.firstElementChild.setAttribute('class', 'fa fa-pause-circle ');
 }
 function pauseVideo() {
+  videoContainerOverlay.classList.remove('video-container-overlay-remove');
   video.pause();
   playPauseBtn.firstElementChild.setAttribute('class', 'fa fa-play-circle ');
 }
@@ -25,6 +26,7 @@ const togglePlay = () => {
 };
 function onPlayEnded() {
   playPauseBtn.firstElementChild.setAttribute('class', 'fa fa-play-circle ');
+  videoContainerOverlay.classList.remove('video-container-overlay-remove');
 }
 
 //  full screen
