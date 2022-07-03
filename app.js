@@ -1,6 +1,7 @@
 // select DOM elements
 const video = document.querySelector('video');
 const videoContainer = document.querySelector('.video-container');
+const volumeContainer = document.querySelector('.volume-container');
 
 const playPauseBtn = document.querySelector('.play-pause-btn');
 
@@ -92,17 +93,26 @@ let isMoving = false;
 function setVolume(e) {
   // console.log(isMoving);
   // console.log(e.buttons & 1);
-  if (isMoving === false || e.target.classList.contains('volume-slider-thumb')) return;
+  if (isMoving === false)
+    // || e.target.classList.contains('volume-slider-thumb'))
+    return;
   else if (e.buttons & (1 === 1)) {
-    const width = this.clientWidth;
-    const clickX = e.offsetX;
+    // const width = this.clientWidth;
+    // const clickX = e.offsetX;
     // console.log('width' + width);
-    // console.log('click' + clickX);
-    volumeThumb.style.transform = `translate(${clickX - width}px,-50%)`;
 
-    video.volume = clickX / width;
+    const rect = volumeSlider.getBoundingClientRect();
+    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+    console.log(percent);
+    video.volume = percent;
+    volumeSlider.style.setProperty('--progres-position', percent);
+    volumeContainer;
+    // console.log('click' + clickX);
+    // volumeThumb.style.transform = `translate(${clickX - width}px,-50%)`;
+
+    // video.volume = clickX / width;
     video.volume > 0.5 ? highVolume() : lowVolume();
-    if (video.volume <= 0.04) muteVolume();
+    if (video.volume <= 0.02) muteVolume();
   }
 }
 
@@ -115,7 +125,7 @@ volumeSlider.addEventListener('touchmove', setVolume);
 
 volumeSlider.addEventListener('pointerdown', () => (isMoving = true));
 
-const CurrentTimeDOM = document.querySelector('.current-time');
+const currentTimeDOM = document.querySelector('.current-time');
 const totalDuration = document.querySelector('.total-duration');
 
 // duration
@@ -126,7 +136,10 @@ video.addEventListener('loadeddata', function () {
 
 // time update
 video.addEventListener('timeupdate', function () {
-  CurrentTimeDOM.textContent = formatDuration(this.currentTime);
+  currentTimeDOM.textContent = formatDuration(this.currentTime);
+  let percent = video.currentTime / video.duration;
+  timelineContainer.style.setProperty('--progres-position', percent);
+  console.log(percent);
 });
 
 // total duration
@@ -157,4 +170,21 @@ function changePlaybackSpeed() {
   if (newPlaybackRate > 2) newPlaybackRate = 0.25;
   video.playbackRate = newPlaybackRate;
   speedBtn.textContent = `${newPlaybackRate}x`;
+}
+
+// timeline
+const timelineContainer = document.querySelector('.timeline-container');
+
+timelineContainer.addEventListener('pointermove', updateTimeline);
+timelineContainer.addEventListener('pointerdown', updateTimeline);
+timelineContainer.addEventListener('touchmove', updateTimeline);
+
+function updateTimeline(e) {
+  if (e.buttons & (1 === 1)) {
+    const rect = timelineContainer.getBoundingClientRect();
+    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+    console.log(rect);
+    timelineContainer.style.setProperty('--progres-position', percent);
+    video.currentTime = percent * video.duration;
+  }
 }
