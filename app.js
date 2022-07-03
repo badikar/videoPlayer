@@ -2,7 +2,7 @@
 const video = document.querySelector('video');
 const videoContainer = document.querySelector('.video-container');
 const volumeContainer = document.querySelector('.volume-container');
-
+const videoContainerOverlay = document.querySelector('.video-container-overlay');
 const playPauseBtn = document.querySelector('.play-pause-btn');
 
 const fullScreenBtn = document.querySelector('.full-screen-btn');
@@ -12,6 +12,7 @@ let isFullScreen = false;
 
 // Play/Pause
 function playVideo() {
+  videoContainerOverlay.classList.remove('video-container-overlay');
   video.play();
   playPauseBtn.firstElementChild.setAttribute('class', 'fa fa-pause-circle ');
 }
@@ -63,6 +64,7 @@ fullScreenBtn.addEventListener('click', toggleFullScreen);
 // toggle play lsiteners
 video.addEventListener('ended', onPlayEnded);
 video.addEventListener('click', togglePlay);
+videoContainerOverlay.addEventListener('click', togglePlay);
 playPauseBtn.addEventListener('click', togglePlay);
 
 // volume control

@@ -20,7 +20,36 @@ body {
   justify-content: center;
   /* centers container in the body */
   margin-inline: auto;
-  aspect-ratio: 16/9;
+}
+
+.video-container-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.overlay-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  aspect-ratio: 1/1;
+  /* border: solid 1px yellow; */
+  display: grid;
+  place-items: center;
+}
+.overlay-icon i {
+  font-size: 6rem;
+  color: rgb(255, 255, 255);
+  opacity: 0.5;
+  transition: font-size 200ms ease-in-out, opacity 150ms ease-in-out;
+}
+
+.overlay-icon i:hover {
+  opacity: 0.8;
+  font-size: 7rem;
 }
 
 video {
