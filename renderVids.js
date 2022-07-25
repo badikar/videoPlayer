@@ -44,12 +44,13 @@ const renderVideos = () => {
                         </div>
                     </div>
                     <video src="${singleVideo.src}"
-                        poster="./videos/poster_1.png"></video>
+                        poster=""></video>
                 </article>
                 <article class="cart-info">
-                    <h3>${singleVideo.id}</h3>
-                    <p></p>
-                </article>`;
+                    <h3>${singleVideo.title}</h3>
+                    <p>${singleVideo.text}</p>
+                </article>
+            </div>`;
     })
     .join('');
   videoSection.innerHTML = videoList;

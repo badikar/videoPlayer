@@ -1,4 +1,4 @@
-// import volumeControl from './volumeControl.js';
+import formatDuration from './formatDuration.js';
 
 function handleVideo() {
   // select DOM elements
@@ -78,7 +78,7 @@ function handleVideo() {
   // ************volume control*****************
 
   const volumeSlider = this.querySelector('.volume-slider');
-  // const volumeThumb = this.querySelector('.volume-slider-thumb');
+
   const volumeBtn = this.querySelector('.volume-btn');
 
   const lowVolume = () => {
@@ -105,7 +105,6 @@ function handleVideo() {
     else if (e.buttons & (1 === 1)) {
       const rect = volumeSlider.getBoundingClientRect();
       const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
-      console.log(percent);
       video.volume = percent;
       volumeSlider.style.setProperty('--progres-position', percent);
       video.volume > 0.5 ? highVolume() : lowVolume();
@@ -124,11 +123,11 @@ function handleVideo() {
   // duration
 
   const currentTimeDOM = this.querySelector('.current-time');
-  const totalDuration = this.querySelector('.total-duration');
+  // const totalDuration = this.querySelector('.total-duration');
 
-  video.addEventListener('loadeddata', function () {
-    totalDuration.textContent = formatDuration(this.duration);
-  });
+  // video.addEventListener('loadeddata', function () {
+  //   totalDuration.textContent = formatDuration(this.duration);
+  // });
 
   // time update
   video.addEventListener('timeupdate', function () {
@@ -136,24 +135,6 @@ function handleVideo() {
     let percent = video.currentTime / video.duration;
     timelineContainer.style.setProperty('--progres-position', percent);
   });
-
-  // total duration
-  const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
-    minimumIntegerDigits: 2,
-  });
-
-  function formatDuration(time) {
-    const seconds = Math.floor(time % 60);
-    const minutes = Math.floor(time / 60) % 60;
-    const hours = Math.floor(time / 3600);
-    if (hours === 0) {
-      return `${minutes}:${leadingZeroFormatter.format(seconds)}`;
-    } else {
-      return `${hours}:${leadingZeroFormatter.format(minutes)}:${leadingZeroFormatter.format(
-        seconds
-      )}`;
-    }
-  }
 
   //  playback speed
   const speedBtn = this.querySelector('.speed-btn');

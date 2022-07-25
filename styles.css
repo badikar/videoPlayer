@@ -15,14 +15,15 @@ body {
 section {
   max-width: 1170px;
   margin: 0 auto;
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(235, 236, 215);
 }
 .cart-container {
-  background-color: rgb(245, 250, 234);
-  margin: 1rem auto;
+  background-color: rgb(255, 255, 255);
   max-width: 480px;
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+  z-index: 4;
 }
 .cart-info {
   height: 10rem;
@@ -30,6 +31,11 @@ section {
 }
 .cart-info h3 {
   text-transform: uppercase;
+}
+.cart-info p {
+  max-width: 380px;
+  border: 1px solid red;
+  margin: 0 auto;
 }
 
 .video-container {
