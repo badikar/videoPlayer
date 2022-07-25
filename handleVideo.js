@@ -1,22 +1,23 @@
+// import volumeControl from './volumeControl.js';
+
 function handleVideo() {
-  console.log('enter');
   // select DOM elements
   const video = this.querySelector('video');
-  console.log(video);
   const videoContainer = this.querySelector('.video-container');
-  const volumeContainer = this.querySelector('.volume-container');
   const videoContainerOverlay = this.querySelector('.video-container-overlay');
   const playPauseBtn = this.querySelector('.play-pause-btn');
-
   const fullScreenBtn = this.querySelector('.full-screen-btn');
 
   // flags
   let isFullScreen = false;
 
+  // *******************
+
   // Play/Pause
   function playVideo() {
     videoContainerOverlay.classList.add('video-container-overlay-remove');
     video.play();
+    // video.onwaiting = loadSpinner();
     playPauseBtn.firstElementChild.setAttribute('class', 'fa fa-pause-circle ');
   }
   function pauseVideo() {
@@ -37,31 +38,33 @@ function handleVideo() {
     videoContainer.requestFullscreen();
     isFullScreen = true;
     fullScreenBtn.firstElementChild.setAttribute('class', 'fa fa-compress');
+    console.log(isFullScreen);
   }
   function minimizeScreen() {
     document.exitFullscreen();
     isFullScreen = false;
     fullScreenBtn.firstElementChild.setAttribute('class', 'fa fa-expand');
+    console.log(isFullScreen);
   }
   function toggleFullScreen() {
     isFullScreen ? minimizeScreen() : fullScreen();
   }
 
   // event listeners
-  this.addEventListener('keydown', (e) => {
-    switch (e.key.toLowerCase()) {
-      case ' ':
-      case 'k':
-        togglePlay();
-        break;
-      case 'f':
-        toggleFullScreen();
-        break;
-      case 'm':
-        toggleMute();
-        break;
-    }
-  });
+  // this.addEventListener('keydown', (e) => {
+  //   switch (e.key.toLowerCase()) {
+  //     case ' ':
+  //     case 'k':
+  //       togglePlay();
+  //       break;
+  //     case 'f':
+  //       toggleFullScreen();
+  //       break;
+  //     case 'm':
+  //       toggleMute();
+  //       break;
+  //   }
+  // });
 
   // full screen listener
   fullScreenBtn.addEventListener('click', toggleFullScreen);
@@ -72,10 +75,10 @@ function handleVideo() {
   videoContainerOverlay.addEventListener('click', togglePlay);
   playPauseBtn.addEventListener('click', togglePlay);
 
-  // volume control
+  // ************volume control*****************
 
   const volumeSlider = this.querySelector('.volume-slider');
-  const volumeThumb = this.querySelector('.volume-slider-thumb');
+  // const volumeThumb = this.querySelector('.volume-slider-thumb');
   const volumeBtn = this.querySelector('.volume-btn');
 
   const lowVolume = () => {
@@ -132,7 +135,6 @@ function handleVideo() {
     currentTimeDOM.textContent = formatDuration(this.currentTime);
     let percent = video.currentTime / video.duration;
     timelineContainer.style.setProperty('--progres-position', percent);
-    console.log(percent);
   });
 
   // total duration

@@ -16,46 +16,52 @@
     </head>
     <body>
         <section id="section">
-            <div class="video-container">
-                <div class="video-container-overlay">
-                    <div class="overlay-icon">
-                        <i class="fa fa-play-circle"></i>
-                    </div>
-                </div>
-                <div class="video-controls-container">
-                    <div class="controls">
-                        <button class="play-pause-btn">
+            <div class="cart-container">
+                <article class="video-container">
+                    <div class="video-container-overlay">
+                        <div class="overlay-icon">
                             <i class="fa fa-play-circle"></i>
-                        </button>
-                        <div class="volume-container">
-                            <button class="volume-btn">
-                                <i class="fa fa-volume-high fa-fw"></i>
+                        </div>
+                    </div>
+                    <div class="video-controls-container">
+                        <div class="controls">
+                            <button class="play-pause-btn">
+                                <i class="fa fa-play-circle"></i>
                             </button>
-                            <div class="volume-slider">
-                                <div class="volume-slider-progres">
-                                    <div class="volume-slider-thumb"></div>
+                            <div class="volume-container">
+                                <button class="volume-btn">
+                                    <i class="fa fa-volume-high fa-fw"></i>
+                                </button>
+                                <div class="volume-slider">
+                                    <div class="volume-slider-progres">
+                                        <div class="volume-slider-thumb"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="duration-container">
-                            <span class="current-time">0:00</span> /
-                            <span class="total-duration"></span>
-                        </div>
-                        <div class="timeline-container">
-                            <div class="timeline">
-                                <div class="timeline-thumb"></div>
+                            <div class="duration-container">
+                                <span class="current-time">0:00</span> /
+                                <span class="total-duration"></span>
                             </div>
+                            <div class="timeline-container">
+                                <div class="timeline">
+                                    <div class="timeline-thumb"></div>
+                                </div>
+                            </div>
+                            <button class="speed-btn wide-btn">1x
+                            </button>
+                            <button class="full-screen-btn">
+                                <i class="fa fa-expand"></i>
+                            </button>
                         </div>
-                        <button class="speed-btn wide-btn">1x
-                        </button>
-                        <button class="full-screen-btn">
-                            <i class="fa fa-expand"></i>
-                        </button>
                     </div>
-                </div>
-                <video src="./videos/vid_1.mp4" poster="./videos/poster_1.png"></video>
+                    <video src="./videos/vid_1.mp4"
+                        poster="./videos/poster_1.png"></video>
+                </article>
+                <article class="cart-info">
+                    <h3>title</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </article>
             </div>
-
         </section>
         <script src="app.js" type='module'></script>
     </body>
