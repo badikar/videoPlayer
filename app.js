@@ -3,7 +3,7 @@ import handleVideo from './handleVideo.js';
 import formatDuration from './formatDuration.js';
 
 const startVideoPlayer = () => {
-  window.addEventListener('DOMContentLoaded', renderVideos());
+  renderVideos();
   const videoCarts = [...document.querySelectorAll('.cart-container')];
 
   videoCarts.forEach((movie) => {

@@ -1,4 +1,5 @@
 import formatDuration from './formatDuration.js';
+import updateTimeline from './updateTimeline.js';
 
 function handleVideo() {
   // select DOM elements
@@ -49,22 +50,6 @@ function handleVideo() {
   function toggleFullScreen() {
     isFullScreen ? minimizeScreen() : fullScreen();
   }
-
-  // event listeners
-  // this.addEventListener('keydown', (e) => {
-  //   switch (e.key.toLowerCase()) {
-  //     case ' ':
-  //     case 'k':
-  //       togglePlay();
-  //       break;
-  //     case 'f':
-  //       toggleFullScreen();
-  //       break;
-  //     case 'm':
-  //       toggleMute();
-  //       break;
-  //   }
-  // });
 
   // full screen listener
   fullScreenBtn.addEventListener('click', toggleFullScreen);
@@ -123,11 +108,6 @@ function handleVideo() {
   // duration
 
   const currentTimeDOM = this.querySelector('.current-time');
-  // const totalDuration = this.querySelector('.total-duration');
-
-  // video.addEventListener('loadeddata', function () {
-  //   totalDuration.textContent = formatDuration(this.duration);
-  // });
 
   // time update
   video.addEventListener('timeupdate', function () {
@@ -148,21 +128,12 @@ function handleVideo() {
     speedBtn.textContent = `${newPlaybackRate}x`;
   }
 
-  // timeline
+  // ************* timeline ********************
   const timelineContainer = this.querySelector('.timeline-container');
 
   timelineContainer.addEventListener('pointermove', updateTimeline);
   timelineContainer.addEventListener('pointerdown', updateTimeline);
   timelineContainer.addEventListener('touchmove', updateTimeline);
-
-  function updateTimeline(e) {
-    if (e.buttons & (1 === 1)) {
-      const rect = timelineContainer.getBoundingClientRect();
-      const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
-      timelineContainer.style.setProperty('--progres-position', percent);
-      video.currentTime = percent * video.duration;
-    }
-  }
 }
 
 export default handleVideo;
