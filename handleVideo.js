@@ -1,5 +1,4 @@
 import formatDuration from './formatDuration.js';
-import updateTimeline from './updateTimeline.js';
 
 function handleVideo() {
   // select DOM elements
@@ -130,6 +129,15 @@ function handleVideo() {
 
   // ************* timeline ********************
   const timelineContainer = this.querySelector('.timeline-container');
+
+  function updateTimeline(e) {
+    if (e.buttons & (1 === 1)) {
+      const rect = timelineContainer.getBoundingClientRect();
+      const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+      timelineContainer.style.setProperty('--progres-position', percent);
+      video.currentTime = percent * video.duration;
+    }
+  }
 
   timelineContainer.addEventListener('pointermove', updateTimeline);
   timelineContainer.addEventListener('pointerdown', updateTimeline);
