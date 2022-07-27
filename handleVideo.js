@@ -1,5 +1,4 @@
 import formatDuration from './formatDuration.js';
-import updateTimeline from './updateTimeline.js';
 
 function handleVideo() {
   // select DOM elements
@@ -117,23 +116,32 @@ function handleVideo() {
   });
 
   //  playback speed
-  const speedBtn = this.querySelector('.speed-btn');
+  // const speedBtn = this.querySelector('.speed-btn');
 
-  speedBtn.addEventListener('click', changePlaybackSpeed);
+  // speedBtn.addEventListener('click', changePlaybackSpeed);
 
-  function changePlaybackSpeed() {
-    let newPlaybackRate = video.playbackRate + 0.25;
-    if (newPlaybackRate > 2) newPlaybackRate = 0.25;
-    video.playbackRate = newPlaybackRate;
-    speedBtn.textContent = `${newPlaybackRate}x`;
-  }
+  // function changePlaybackSpeed() {
+  //   let newPlaybackRate = video.playbackRate + 0.25;
+  //   if (newPlaybackRate > 2) newPlaybackRate = 0.25;
+  //   video.playbackRate = newPlaybackRate;
+  //   speedBtn.textContent = `${newPlaybackRate}x`;
+  // }
 
-  // ************* timeline ********************
+  // timeline
   const timelineContainer = this.querySelector('.timeline-container');
 
   timelineContainer.addEventListener('pointermove', updateTimeline);
   timelineContainer.addEventListener('pointerdown', updateTimeline);
   timelineContainer.addEventListener('touchmove', updateTimeline);
+
+  function updateTimeline(e) {
+    if (e.buttons & (1 === 1)) {
+      const rect = timelineContainer.getBoundingClientRect();
+      const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+      timelineContainer.style.setProperty('--progres-position', percent);
+      video.currentTime = percent * video.duration;
+    }
+  }
 }
 
 export default handleVideo;
